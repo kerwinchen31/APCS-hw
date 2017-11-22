@@ -2,6 +2,13 @@
 //APCS1 pd1
 //HW38 -- Put It Together
 //2017-11-22
+/*
+Essentailly, what I did was i created a 2d array, wrote a method to populate it,
+wrote a method that printed out the elements in a concise way, and also wrote
+a method that alllows the user to give an input on which two elements to swap.
+I made this perpetuate to infinity so the user can keep on swapping, but they
+can easily exit using the keyboard shortcut C-c
+*/
 import cs1.Keyboard;
 
 public class Swapper{
