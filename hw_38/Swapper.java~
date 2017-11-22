@@ -1,0 +1,17 @@
+import cs1.Keyboard;
+
+public Swapper{
+    String[][] box = new String[2][3];
+    final String LETTERS = "qwertyuiopasdfghjklzxcvbnm";
+    public void fill(){
+	for(String a:box){
+	    for(String[] b:a){
+		box[a][b] = "lol";
+	    }
+	}
+    }
+    public static void main(String[] args){
+	box.fill();
+	System.out.println(box[1][2]);
+    }
+}
