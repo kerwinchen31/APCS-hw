@@ -11,7 +11,7 @@ can easily exit using the keyboard shortcut C-c
 */
 import cs1.Keyboard;
 
-public class Swapper{
+public class Hello{
     static String[][] box = new String[4][5];
     static final String LETTERS = "qwertyuiopasdfghjklzxcvbnm";
 
