@@ -9,6 +9,12 @@ a method that allows the user to give an input on which two elements to swap.
 I made this perpetuate to infinity so the user can keep on swapping, but they
 can easily exit using the keyboard shortcut C-c
 */
+/*
+for version 2, I made horizontal vs vertical changes more understandble to the user.
+I did this by previding clear explanations on exactly what to do.
+I tried using the color thing someone posted on the quaf but the colors wouldn't render
+in the command line thing so I left it out.
+*/
 import cs1.Keyboard;
 
 public class Swapper{
@@ -53,9 +59,12 @@ public class Swapper{
 	System.out.println(print(box));
 	//perpetuates swapping
 	while (n == 0){
+	    System.out.println("Press Ctrl+C to exit anytime");
 	    System.out.println("Pick 2 elements to swap. Let's call them A and B");
+	    System.out.println("Rows are horizontal, from top to bottom starting with 1");
 	    System.out.println("What is the row# of A?"); 
 	    int fr = Keyboard.readInt();
+	    System.out.println("Columns are vertical; from left to right starting with 1");
 	    System.out.println("What is the column# of A?"); 
 	    int fc = Keyboard.readInt();
 	    System.out.println("What is the row# of B?"); 
