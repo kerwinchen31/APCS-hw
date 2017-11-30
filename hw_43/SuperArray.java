@@ -1,31 +1,16 @@
-// Clyde "Thluffy" Sinclair
-// APCS1 pd0
+// Kerwin Chen
+// APCS1 pd1
 // HW43 -- adhering to a published standard (implementing an interface)
 // 2017-11-30r
 
-/***************************
- * class SuperArray version 3.0
- * ( SKELETON )
- * Wrapper class for array. Facilitates resizing,
- * resizing
- * expansion
- * read/write capability on elements
- * adding an element to end of array
- * adding an element at specified index
- * removing an element at specified index
- *
- * ...and now SuperArray complies with the specifications of the
- * ListInt interface. (ListInt.java must be in same dir as this file)
- ***************************/
-
-public class SuperArray
+public class SuperArray implements ListInt
 {
 
   private int[] _data;  //underlying container
   private int _size;    //number of elements in this SuperArray
 
 
-  //default constructor – initializes 10-item array
+  //default constructor - initializes 10-item array
   public SuperArray()
   {
     _data = new int[10];
@@ -76,9 +61,10 @@ public class SuperArray
 
 
   //adds an item after the last item
-  public void add( int newVal )
+  public boolean add( int newVal )
   {
     add( _size, newVal );
+    return _data[_size] == newVal;
   }
 
 
@@ -98,12 +84,13 @@ public class SuperArray
 
   //removes the item at index
   //shifts elements left to fill in newly-empted slot
-  public void remove( int index )
+  public int remove( int index )
   {
     for( int i = index; i < _size - 1; i++ ) {
       _data[i] = _data[i+1];
     }
     _size--;
+    return index;
   }
 
 
@@ -118,8 +105,7 @@ public class SuperArray
   //main method for testing
   public static void main( String[] args )
   {
-    /*~~~~~~~~move~me~down~~~~~~~~~~~~~~V~~~~~~~~
-    ListInt mayfield = new SuperArray();
+    ListInt  mayfield = new SuperArray();
     System.out.println("Printing empty SuperArray mayfield...");
     System.out.println(mayfield);
 
@@ -148,40 +134,8 @@ public class SuperArray
     mayfield.add(1,77);
     System.out.println("Printing SuperArray mayfield post-insert...");
     System.out.println(mayfield);
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|~~~~~~~~*/
+
   }//end main()
 
 
 }//end class
-
-
-/***
-             ,,########################################,,
-          .*##############################################*
-        ,*####*:::*########***::::::::**######:::*###########,
-      .*####:    *#####*.                 :*###,.#######*,####*.
-     *####:    *#####*                      .###########*  ,####*
-  .*####:    ,#######,                        ##########*    :####*
-  *####.    :#########*,                       ,,,,,,,,.      ,####:
-    ####*  ,##############****************:,,               .####*
-     :####*#####################################**,        *####.
-       *############################################*,   :####:
-        .#############################################*,####*
-          :#####:*****#####################################.
-            *####:                  .,,,:*****###########,
-             .*####,                            *######*
-               .####* :*#######*               ,#####*
-                 *###############*,,,,,,,,::**######,
-                   *##############################:
-                     *####*****##########**#####*
-                      .####*.            :####*
-                        :####*         .#####,
-                          *####:      *####:
-                           .*####,  *####*
-                             :####*####*
-                               *######
-                                 *##
-
-         -Miranda Chaiken '16
-
-         ***/
