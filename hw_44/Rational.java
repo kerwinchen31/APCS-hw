@@ -11,9 +11,10 @@
  * comparison
  ******************************/
 
-// Clyde "Thluffy" Sinclair
-// APCS1 p0
-// HW44 -- implementing an interface, boolean short-circuiting
+
+// Death Wish Coffee (Kerwin Chen, Lynne Wang)
+// APCS1 p1
+// HW44 -- Rational Equality
 // 2017-12-01f
 
 public class Rational implements Comparable
@@ -149,33 +150,41 @@ public class Rational implements Comparable
    *   Object), or if this and other have matching attribute values.
    *   (which in this case indicates equivalent fractions)
    *********************/
-  public boolean equals( Object other )
+      public boolean equals( Object other )
   {
     //First, reduce both fractions.
     //...thus allowing for direct comparison of attributes
     reduce();
+    if (other instanceof Rational){
+	Rational Other = (Rational) other;
+	Other.reduce();
+	return  this._numerator == Other._numerator && this._denominator == Other._denominator;
+    }
+    else{
+	throw new ClassCastException();
+    }
+    }//end equals()
+    
 
-    /* YOUR IMPLEMENTATION HERE */
-    return true;
-  }//end equals()
 
-
-  /*********************
-   * int compareTo(Object) -- tell which of two Rationals is greater
-   *  pre:
-   *  post: Throw exception if input not an instance of class Rational.
-   *    Return 0 if this Rational equiv to Rational argument.
-   *    Return negative integer if this < other.
-   *    Return positive integer if this > other.
-   *********************/
-  public int compareTo( Object other )
-  {
-      if (other instanceof Rational) {
-	  Rational Other = new Object();
-	  Other = other;
-	  return this._numerator * Other._denominator - this._denominator * Other._numerator;
-      }
-  }
+    /*********************
+     * int compareTo(Object) -- tell which of two Rationals is greater
+     *  pre:
+     *  post: Throw exception if input not an instance of class Rational.
+     *    Return 0 if this Rational equiv to Rational argument.
+     *    Return negative integer if this < other.
+     *    Return positive integer if this > other.
+     *********************/
+        public int compareTo( Object other )
+    {
+	if (other instanceof Rational) {
+	    Rational Other = (Rational) other;
+	    return this._numerator * Other._denominator - this._denominator * Other._numerator;
+	}
+	else{
+	    throw new ClassCastException();
+	}
+	}
 
 
   //main method for testing
