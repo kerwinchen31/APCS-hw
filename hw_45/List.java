@@ -4,7 +4,10 @@
  *  class wishing to adhere to this specification.
  * This interface specifies behaviors of a list of ints.
  ***************************/
-
+// Kerwin Chen
+// APCS1 pd1
+// HW45 -- In America, The driver sits on the Left
+// 2017-12-4
 public interface List
 {
   // Return number of elements in the list

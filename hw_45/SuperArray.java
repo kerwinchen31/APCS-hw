@@ -1,7 +1,7 @@
 // Kerwin Chen
 // APCS1 pd1
-// HW43 -- adhering to a published standard (implementing an interface)
-// 2017-11-30r
+// HW45 -- In America, The driver sits on the Left
+// 2017-12-4
 
 public class SuperArray extends java.lang.Object implements List
 {
@@ -60,7 +60,7 @@ public class SuperArray extends java.lang.Object implements List
   }
 
   //inserts an item at index
-  public void add( int index, java.lang.Object newVal )
+  public void addm( int index, java.lang.Object newVal )
   {
     //first expand if necessary
     if ( _size >= _data.length )
@@ -75,7 +75,7 @@ public class SuperArray extends java.lang.Object implements List
   //adds an item after the last item
   public boolean add( Object newVal )
   {
-    add( _size, newVal );
+    addm( _size, newVal );
     return _data[_size] == newVal;
   }
 
@@ -84,11 +84,12 @@ public class SuperArray extends java.lang.Object implements List
   //shifts elements left to fill in newly-empted slot
   public java.lang.Object remove( int index )
   {
+      Object temp = _data[index];
     for( int i = index; i < _size - 1; i++ ) {
       _data[i] = _data[i+1];
     }
     _size--;
-    return index;
+    return temp;
   }
 
 
@@ -103,7 +104,7 @@ public class SuperArray extends java.lang.Object implements List
   //main method for testing
   public static void main( String[] args )
   {
-    List mayfield = new SuperArray();
+    SuperArray mayfield = new SuperArray();
     System.out.println("Printing empty SuperArray mayfield...");
     System.out.println(mayfield);
 
@@ -115,7 +116,7 @@ public class SuperArray extends java.lang.Object implements List
 
     System.out.println("Printing populated SuperArray mayfield...");
     System.out.println(mayfield);
-/*
+
     mayfield.remove(3);
     System.out.println("Printing SuperArray mayfield post-remove...");
     System.out.println(mayfield);
@@ -123,15 +124,15 @@ public class SuperArray extends java.lang.Object implements List
     System.out.println("Printing SuperArray mayfield post-remove...");
     System.out.println(mayfield);
 
-    mayfield.add(3,(Object) 99);
+    mayfield.addm(3,(Object) 99);
     System.out.println("Printing SuperArray mayfield post-insert...");
     System.out.println(mayfield);
-    mayfield.add(2,(Object) 88);
+    mayfield.addm(2,(Object) 88);
     System.out.println("Printing SuperArray mayfield post-insert...");
     System.out.println(mayfield);
-    mayfield.add(1,(Object) 77);
+    mayfield.addm(1,(Object) 77);
     System.out.println("Printing SuperArray mayfield post-insert...");
-    System.out.println(mayfield);*/
+    System.out.println(mayfield);
 
   }//end main()
 
