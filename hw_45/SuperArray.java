@@ -44,7 +44,7 @@ public class SuperArray extends java.lang.Object implements List
 
 
   //accessor -- return value at specified index
-  public int get( int index )
+  public Object get( int index )
   {
     return _data[index];
   }
@@ -52,24 +52,15 @@ public class SuperArray extends java.lang.Object implements List
 
   //mutator -- set value at index to newVal,
   //           return old value at index
-  public int set( int index, int newVal )
+  public Object set( int index, java.lang.Object newVal )
   {
     Object temp = _data[index];
     _data[index] = newVal;
     return temp;
   }
 
-
-  //adds an item after the last item
-  public boolean add( Object newVal )
-  {
-    add( _size, newVal );
-    return _data[_size] == newVal;
-  }
-
-
   //inserts an item at index
-  public void add( int index, int newVal )
+  public void add( int index, java.lang.Object newVal )
   {
     //first expand if necessary
     if ( _size >= _data.length )
@@ -81,10 +72,17 @@ public class SuperArray extends java.lang.Object implements List
     _size++;
   }
 
+  //adds an item after the last item
+  public boolean add( Object newVal )
+  {
+    add( _size, newVal );
+    return _data[_size] == newVal;
+  }
+
 
   //removes the item at index
   //shifts elements left to fill in newly-empted slot
-  public int remove( int index )
+  public java.lang.Object remove( int index )
   {
     for( int i = index; i < _size - 1; i++ ) {
       _data[i] = _data[i+1];
@@ -105,7 +103,7 @@ public class SuperArray extends java.lang.Object implements List
   //main method for testing
   public static void main( String[] args )
   {
-    List  mayfield = new SuperArray();
+    List mayfield = new SuperArray();
     System.out.println("Printing empty SuperArray mayfield...");
     System.out.println(mayfield);
 
@@ -117,7 +115,7 @@ public class SuperArray extends java.lang.Object implements List
 
     System.out.println("Printing populated SuperArray mayfield...");
     System.out.println(mayfield);
-
+/*
     mayfield.remove(3);
     System.out.println("Printing SuperArray mayfield post-remove...");
     System.out.println(mayfield);
@@ -125,15 +123,15 @@ public class SuperArray extends java.lang.Object implements List
     System.out.println("Printing SuperArray mayfield post-remove...");
     System.out.println(mayfield);
 
-    mayfield.add(3,99);
+    mayfield.add(3,(Object) 99);
     System.out.println("Printing SuperArray mayfield post-insert...");
     System.out.println(mayfield);
-    mayfield.add(2,88);
+    mayfield.add(2,(Object) 88);
     System.out.println("Printing SuperArray mayfield post-insert...");
     System.out.println(mayfield);
-    mayfield.add(1,77);
+    mayfield.add(1,(Object) 77);
     System.out.println("Printing SuperArray mayfield post-insert...");
-    System.out.println(mayfield);
+    System.out.println(mayfield);*/
 
   }//end main()
 
