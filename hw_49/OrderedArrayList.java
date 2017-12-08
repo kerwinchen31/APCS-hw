@@ -4,6 +4,10 @@
  * Imposes the restriction that stored items 
  * must remain sorted in ascending order
  ********************************/
+//Kerwin Chen
+//APCS1 pd1
+//hw49 -- Halving the Halves
+//2017-12-8
 
 //ArrayList's implementation is in the java.util package
 import java.util.ArrayList;
@@ -45,36 +49,25 @@ public class OrderedArrayList
 	return _data.get(index); 
     }
 
-    public void addBin(Comparable newVal){
-	double  possy = size() / 2.;
-	int pos = (int) possy;
-	//System.out.println(pos);
-	if (size() == 0){
-	    _data.add(0,newVal);
-	}else if (size() == 1){
-	    if (_data.get(0).compareTo(newVal) <0){
-		_data.add(1,newVal);
+    public void addB(Comparable newVal){
+	int lo = 0;
+	int pos;
+        int hi = size()-1;
+        while (hi >= lo) {
+            pos = (lo + hi) / 2;
+            int a = _data.get(pos).compareTo(newVal);
+
+            if (a == 0) {
+                _data.add(pos, newVal);
+                return;
+            }else if (a > 0){
+                hi = pos - 1;
 	    }else{
-		  _data.add(0,newVal);
-	    }
-	}else{
-	    Comparable a = _data.get(pos-1);
-	    Comparable b = _data.get(pos);
-	    int c = a.compareTo(newVal);
-	    int d = b.compareTo(newVal);
-	    while (pos != 0 && pos != size()){
-		if (c<0 && d>0){
-		    _data.add(pos, newVal);
-		    break;
-		}else if (c>0){
-		    pos = (pos + size())/2;
-		}else if(((Comparable)size()).compareTo(newVal)<0){
-		    pos /= 2;
-		}
+                lo = pos + 1;
 	    }
 	}
-    }
-	    
+        _data.add(lo, newVal);
+    }    
 	    
     /***
      * add takes as input any comparable object 
@@ -104,7 +97,7 @@ public class OrderedArrayList
 
 	// testing linear search
 	for( int i = 0; i < 15; i++ )
-	    Franz.addBin( (int)( 50 * Math.random() ) );
+	    Franz.addB( (int)( 50 * Math.random() ) );
 	System.out.println( Franz );
 
 	//check for sorted-ness
