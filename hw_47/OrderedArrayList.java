@@ -47,20 +47,14 @@ public class OrderedArrayList
 	return a; //placeholder 
     }
 
-
     public int size(){
 	return _data.size();
     }
-    
-	
-    
-
     
     public Comparable get( int index )
     { 
 	return _data.get(index); //placeholder  
     }
-
 
     public void add(Comparable newVal)
     {
@@ -73,13 +67,8 @@ public class OrderedArrayList
 		q++;
 	    }
 	}
-	_data.add(q,newVal);
-	
-	    
-	    
+	_data.add(q,newVal);	    	    
     }
-
-
 
     // main method solely for testing purposes
     public static void main( String[] args )
