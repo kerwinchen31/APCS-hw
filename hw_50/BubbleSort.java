@@ -1,7 +1,10 @@
+//Kerwin Chen
+//APCS1 pd1
+//hw50 -- Dat Bubbly Tho
+//2017-12-11
 /******************************
  * class BubbleSort -- implements bubblesort algorithm (vanilla)
  ******************************/
-
 import java.util.ArrayList;
 
 public class BubbleSort {
@@ -31,8 +34,6 @@ public class BubbleSort {
       al.set( i, al.set( randomIndex, al.get(i) ) );
     }
   }
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
   // VOID version of bubbleSort
   // Rearranges elements of input ArrayList
@@ -42,23 +43,32 @@ public class BubbleSort {
       int passes = data.size()-1;
       while (passes != 0){
 	  for (int x = 0; x<data.size()-1; x++){
-	      ArrayList<Comparable> a = data[x];
+	      if(data.get(x).compareTo(data.get(x+1))>0){
+		  Comparable temp = data.get(x+1);
+		  data.set(x+1,data.get(x));
+		  data.set(x,temp);
+	      }
+	  }
+	  passes -= 1;
+      }
   }
-
 
   // ArrayList-returning bubbleSort
   // postcondition: order of input ArrayList's elements unchanged
   //                Returns sorted copy of input ArrayList.
   public static ArrayList<Comparable> bubbleSort( ArrayList<Comparable> input )
   {
-    /* YOUR IMPLEMENTATION HERE */
+      ArrayList<Comparable> renamed = new ArrayList<Comparable>();
+      for (Comparable x: input)
+	  renamed.add(x);
+      bubbleSortV(renamed);
+      return renamed;
   }
 
 
   public static void main( String [] args )
   {
-
-    /*===============for VOID methods=============
+      /*
       ArrayList glen = new ArrayList<Integer>();
       glen.add(7);
       glen.add(1);
@@ -73,9 +83,8 @@ public class BubbleSort {
       System.out.println( "ArrayList coco before sorting:\n" + coco );
       bubbleSortV(coco);
       System.out.println( "ArrayList coco after sorting:\n" + coco );
-      ============================================*/
+      */
 
-    /*==========for AL-returning methods==========
     	ArrayList glen = new ArrayList<Integer>();
       glen.add(7);
       glen.add(1);
@@ -95,8 +104,5 @@ public class BubbleSort {
       + cocoSorted );
       System.out.println( "ArrayList coco after sorting:\n" + coco );
       System.out.println( coco );
-      ============================================*/
-
   }//end main
-
 }//end class BubbleSort
