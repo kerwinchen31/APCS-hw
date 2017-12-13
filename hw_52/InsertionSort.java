@@ -1,7 +1,10 @@
 /***************************************
  *  class InsertionSort -- implements InsertionSort algorithm
  ***************************************/
-
+//Kerwin Chen
+//APCS1 pd1
+//hw52 -- Poker Face
+//2017-12-13
 import java.util.ArrayList;
 
 public class InsertionSort
@@ -39,11 +42,21 @@ public class InsertionSort
   public static void insertionSortV( ArrayList<Comparable> data )
   {
       int working = 1;
+      int q = working;
+      int nav = working - 1;
       for (int counter = data.size() - 1; counter != 0; counter--){
-	  
-    /* YOUR IMPLEMENTATION HERE */
-  }//end insertionSortV
-
+	  while(data.get(q).compareTo(data.get(nav))<0){
+	      data.set(nav+1, data.set(nav,data.get(q)));
+	      nav--;
+	      q--;
+	      if (q == 0)
+		  break;
+	  }
+	  working++;
+	  nav = working - 1;
+	  q = working;
+      }
+  }
 
   // ArrayList-returning insertionSort
   // postcondition: order of input ArrayList's elements unchanged
@@ -51,13 +64,16 @@ public class InsertionSort
   public static ArrayList<Comparable>
     insertionSort( ArrayList<Comparable> input )
   {
-    /* YOUR IMPLEMENTATION HERE */
+      ArrayList copy = new ArrayList<Comparable>();
+      for (Comparable x:input)
+	  copy.add(x);
+      insertionSortV(copy);
+      return copy;
   }//end insertionSort
 
 
   public static void main( String [] args )
-  {
-    /*===============for VOID methods=============
+  {/*
       System.out.println("\n*** Testing sort-in-place (void) version... *** ");
       ArrayList glen = new ArrayList<Integer>();
       glen.add(7);
@@ -72,10 +88,8 @@ public class InsertionSort
       ArrayList coco = populate( 10, 1, 1000 );
       System.out.println( "\nArrayList coco before sorting:\n" + coco );
       insertionSortV(coco);
-      System.out.println( "\nArrayList coco after sorting:\n" + coco );
-      ============================================*/
+      System.out.println( "\nArrayList coco after sorting:\n" + coco );*/
 
-    /*==========for AL-returning methods==========
       System.out.println( "*** Testing non-void version... *** " );
     	ArrayList glen = new ArrayList<Integer>();
       glen.add(7);
@@ -96,8 +110,5 @@ public class InsertionSort
       + cocoSorted );
       System.out.println( "\nArrayList coco after sorting:\n" + coco );
       System.out.println( coco );
-      ============================================*/
-
   }//end main
-
 }//end class InsertionSort
