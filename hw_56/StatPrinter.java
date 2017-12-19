@@ -37,15 +37,16 @@
   * Develop 1 fxn at a time, test it, then move to next.
   * For coding today, what extra code do you need to get past compiler?
   ====================================================================*/
-
+//Kerwin Chen
+//APCS1 pd1
+//hw56 -- His Toe Grammar
+//2017-12-19
 import java.util.ArrayList;
-
 
 public class StatPrinter {
 
     // instance variable for frequencies of each integer in input ArrayList
     private ArrayList <Integer> _frequency;
-
 
     //*************** QUESTION 02 **************************
     //precond:  data.size() > 0, each entry b/t 0,100 inclusive
@@ -54,20 +55,24 @@ public class StatPrinter {
     //eg, for data [2,3,2,5,2,3]
     //  _frequency would be [0,0,3,2,0,1]
     public StatPrinter( ArrayList <Integer> data ) 
-    { 
-	/* YOUR IMPLEMENTATION HERE */
+    {
+	_frequency = new ArrayList<Integer>();
+	for (int x:data){
+	    while (x>=_frequency.size())
+		_frequency.add(0);
+	    _frequency.set(x,_frequency.get(x)+1);
+	}
     }
-
-
     //*************** QUESTION 01 **************************
     //precond:  data.size() > 0
     //postcond: returns largest integer in data
     public Integer max( ArrayList <Integer> data ) 
-    { 
-	/* YOUR IMPLEMENTATION HERE */
+    {
+	int x = data.get(0);
+	for(int y:data)
+	    x = Math.max(x,y);
+	return x;
     }
-
-
     //*************** QUESTION 03 **************************
     //postcond: returns true if i > 0 and i < _frequency.size() - 1
     //          and _frequency.get( i - 1 ) < _frequency.get( i )
@@ -79,25 +84,40 @@ public class StatPrinter {
     //    isLocalMode(1) -> true
     //    isLocalMode(5) -> true
     public boolean isLocalMode( int i ) 
-    { 
-	/* YOUR IMPLEMENTATION HERE */
+    {
+	return i>0 && i<_frequency.size()-1 &&  _frequency.get(i-1) < _frequency.get(i) && _frequency.get(i+1) < _frequency.get(i);
     }
-
-
     //*************** QUESTION 04 **************************
     //postcond: returns list of modes in _frequency
     public ArrayList<Integer> getLocalModes() 
     {
-	/* YOUR IMPLEMENTATION HERE */
-
+	ArrayList<Integer> ans = new ArrayList<Integer>();
+	for (int x:_frequency){
+	    if (isLocalMode(x))
+		ans.add(x);
+	}
+	return ans;
     }
-
-
     //*************** QUESTION 05 **************************
     //precond:  longestBar > 0
     public void printHistogram( int longestBar ) 
     {
-	/* YOUR IMPLEMENTATION HERE */ 
+	int standard = longestBar / max(_frequency);
+	String ans = "";
+	int ind = 0;
+	for (int x:_frequency){
+	    ans += ind;
+	    ans += ":";
+	    int numStar = standard * x;
+	    String  starString = "";
+	    while (numStar > 0){
+		starString += "*";
+		numStar--;
+	    }
+	    ans += starString;
+	    ans += "\n";
+	    ind++;
+	}
+	System.out.println(ans);
     }
- 
 }//end class StatPrinter
