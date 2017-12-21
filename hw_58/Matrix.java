@@ -17,7 +17,10 @@
  * Implement methods below, categorize runtime of each. 
  * Test in main method.
  ***/
-
+//Kerwin Chen
+//APCS1 pd1
+//hw59 -- Make the Matrix Work For you
+//2017-12-21
 
 public class Matrix 
 {
@@ -157,22 +160,36 @@ public class Matrix
     //returns copy of row r
     public Object[] getRow( int r )
     {
-    }//O(?)
+	return _matrix[r];
+    }//O(1)
 
     //replaces row r with 1D array newRow
     //returns old row
     public Object [] setRow( int r, Object[] newRow )
     {
-    }//O(?)
+	Object[] oldRow = _matrix[r];
+	_matrix[r] = newRow;
+	return oldRow;
+    }//O(1)
 
     public Object [] setCol( int c, Object[] newCol )
     {
-    }//O(?)
+	Object[] oldCol = new Object[size()];
+	for( int x = 0; x < size();x++){
+	    oldCol[x] = _matrix[x][c];
+	    _matrix[x][c] = newCol[x];
+	}
+	return oldCol;
+    }//O(n)
 
     //M[i,j] -> M[j,i] for all i,j
     public void transpose()
     {
-    }//O(?)
+	Matrix foo = new Matrix(size());
+	for (int x = 0; x < this.size();x++)
+	    foo.setCol(x,this.getRow(x));
+	this._matrix = foo._matrix;
+    }//O(n)
     
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
    
@@ -194,7 +211,9 @@ public class Matrix
 	x.set(2,1,"bro"); 
 	x.set(2,2,"cow"); 
 	System.out.println(x);
-
+	x.transpose();
+	System.out.println(x);
+	
 	Matrix m3 = new Matrix(3); //3x3
 	System.out.println(m1);
     }//end main()
