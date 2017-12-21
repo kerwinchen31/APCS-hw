@@ -17,151 +17,160 @@
  * Implement methods below, categorize runtime of each. 
  * Test in main method.
  ***/
-//Kerwin Chen
-//APCS1 pd1
-//hw57 -- How Deep Does the Rabbit Hole Go?
-//2017-12-20
+
 
 public class Matrix 
 {
-  //constant for default matrix size
-  private final static int DEFAULT_SIZE = 2;
+    //constant for default matrix size
+    private final static int DEFAULT_SIZE = 2;
 
-  private Object[][] matrix;
+    private Object[][] _matrix;
 
     //default constructor intializes a DEFAULT_SIZE*DEFAULT_SIZE matrix
-    public Matrix( ) 
+    public Matrix()
     {
-	matrix = new Object[DEFAULT_SIZE][DEFAULT_SIZE];
+	_matrix = new Object[DEFAULT_SIZE][DEFAULT_SIZE];
     }
 
 
-  //constructor intializes an a*a matrix
-  public Matrix( int a ) 
-  {
-      matrix = new Object[a+1][a+1];
-  }
+    //constructor intializes an a*a matrix
+    public Matrix( int a ) 
+    {
+	_matrix = new Object[a][a];
+    }
 
 
-  //return size of this matrix, where size is 1 dimension
-  private int size() 
-  {
-      int ans = 0;
-      for(Object x:matrix)
-	  ans++;
-      return ans;
-  }
+    //return size of this matrix, where size is 1 dimension
+    private int size() 
+    {
+	return _matrix.length;
+    }
 
 
-  //return the item at the specified row & column   
-  private Object get( int r, int c ) 
-  {
-      return matrix[r-1][c-1];
-  }
+    //return the item at the specified row & column   
+    private Object get( int r, int c ) 
+    {
+	return _matrix[r-1][c-1];
+    }
 
 
-  //return true if this matrix is empty, false otherwise
-  private boolean isEmpty() 
-  {
-      boolean ans = true;
-      for (int x = 1; x< this.size();x++){
-	  for (int y = 1; y < this.size();y++){
-	      if (get(x,y)!= null)
-		  ans = false;
-	  }
-      }
-      return ans;
-  }
+    //return true if this matrix is empty, false otherwise
+    private boolean isEmpty( int r, int c ) 
+    {
+	return get(r,c) == null;
+
+    }
 
 
-  //overwrite item at specified row and column with newVal
-  //return old value
-  private Object set( int r, int c, Object newVal ) 
-  {
-      Object oldVal = matrix[r-1][c-1];
-      matrix[r-1][c-1] = newVal;
-      return oldVal;
-  }
+    //overwrite item at specified row and column with newVal
+    //return old value
+    private Object set( int r, int c, Object newVal ) 
+    {
+	Object retVal = _matrix[r-1][c-1];
+	_matrix[r-1][c-1] = newVal;
+	return retVal;
+    }
 
 
-  //return String representation of this matrix
-  // (make it look like a matrix)
-  public String toString() 
-  {
-      String ans = "";
-      for(int x = 1; x<this.size(); x++){
-	  for(int y = 1;y <this.size(); y++){
-	      ans += get(x,y);
-	      ans += " ";
-	  }
-	  ans += "\n";
-      }
-      return ans;
-  }
+    //return String representation of this matrix
+    // (make it look like a matrix)
+    public String toString() 
+    {
+	String foo = "";
+	for( int i =0; i < size(); i++ ) {
+	    foo += "| ";
+	    for( int j=0; j < size(); j++ ) {
+		foo += _matrix[i][j] + " "; //get(i+1,j+1)
+	    }
+	    foo += "|\n";
+	}
+	
+	return foo;
+    }
 
 
-  //override inherited equals method
-  //criteria for equality: matrices have identical dimensions,
-  // and identical values in each slot
-  public boolean equals( Object rightSide ) 
-  {
-      if (!(rightSide instanceof Matrix) || this.size() != ((Matrix) rightSide).size())
-	  return false;
-      for (int x = 1; x < this.size(); x++){
-	  for (int y = 1; y < this.size(); y++){
-	      if (this.get(x,y) != ((Matrix) rightSide).get(x,y))
-		  return false;
-	  }
-      }
-      return true;
-  }
+    //override inherited equals method
+    //criteria for equality: matrices have identical dimensions,
+    // and identical values in each slot
+    public boolean equals( Object rightSide ) 
+    {
+	boolean foo = false;
+
+	if (this == rightSide) foo = true;  
+	// checks for aliases  ex. m1.equals(m1) is true
+
+	else if ( rightSide instanceof Matrix 
+		  && size() == ( (Matrix)rightSide).size() ) {
+	    Matrix r = (Matrix) rightSide; //for cleaner code later
+	    foo = true;
+	    outer:
+	    for( int i = 0; i < size(); i++ ) {
+		for( int j = 0; j < size(); j++ ) {
+		    if ( !isEmpty(i,j) && ( !get(i,j).equals(r.get(i,j) ) ) ) {
+			foo = false;
+			break outer;
+		    }
+		    else if ( !( isEmpty(i,j) && r.isEmpty(i,j) ) ) {
+			foo = false;
+			break outer;
+		    }
+		}
+	    }
+	}
+	return foo;
+    }//end equals()
 
 
-  //swap two columns of this matrix 
-  //(1,1) is top left corner of matrix
-  //row values increase going down
-  //column value increase L-to-R
-  public void swapColumns( int c1, int c2  ) 
-  {
-      int a = size();
-      while (a != 0){
-	  this.set(a,c1,this.set(a,c2, c1));
-	  a--;
-      }
-  }
+
+    //swap two columns of this matrix 
+    //(1,1) is top left corner of matrix
+    //row values increase going down
+    //column value increase L-to-R
+    public void swapColumns( int c1, int c2  ) 
+    {
+	c1 = c1-1;
+	c2 = c2-1;
+    
+	for( int i = 0; i < size(); i++ ) {
+	    set( i, c1, set( i, c2, get(i,c1) ) );
+	}
+    }//O(n) b/c must visit n rows
 
 
-  //swap two rows of this matrix 
-  //(1,1) is top left corner of matrix
-  //row values increase going down
-  //column value increase L-to-R
+    //swap two rows of this matrix 
+    //(1,1) is top left corner of matrix
+    //row values increase going down
+    //column value increase L-to-R
     public void swapRows( int r1, int r2  ) 
     {
-	//still buggy
-	int a = size();
-	while (a != 0){
-	    this.set(r2, (int) this.set(r1, a,get(r2,a)),r1);
-	    a--;
-	} 
-    }
+	r1 = r1-1;
+	r2 = r2-2;
+	Object [] temp = _matrix[r1];
+	_matrix[r1] = _matrix[r2];
+	_matrix[r2] = temp; 
+    }//O(1)
 
 
-  //main method for testing
-  public static void main( String[] args ) 
-  {
-      Matrix foo = new Matrix(3);
-      foo.set(1, 1, 1);
-      foo.set(2, 1, 2);
-      foo.set(3, 1, 3);
-      foo.set(1, 2, 4);
-      foo.set(1, 3, 5);
-      foo.set(2, 2, 6);
-      foo.set(2, 3, 7);
-      foo.set(3, 2, 8);
-      foo.set(3, 3, 9);
-      System.out.println(foo);
-      foo.swapRows(1,3);
-      System.out.println(foo);
-  }
+    //main method for testing
+    public static void main( String[] args ) 
+    {
+	Matrix m1 = new Matrix(); // 2 x 2
+	Matrix m2 = new Matrix(10); // 10 x 10
+	System.out.println("m1 size: " + m1.size());
+	System.out.println("m2 size: " + m2.size());
+	System.out.println("m1 get(1,1) : " + m1.get(1,1));
+	System.out.println("m1 isEmpty(1,1) : " + m1.isEmpty(1,1));	
+
+	Matrix x = new Matrix(2); // 2x2
+	System.out.println(x);
+	x.set(1,1,"how"); 
+	x.set(1,2,"now"); 
+	x.set(2,1,"bro"); 
+	x.set(2,2,"cow"); 
+	System.out.println(x);
+
+	Matrix m3 = new Matrix(3); //3x3
+	System.out.println(m1);
+    }//end main()
 
 }//end class Matrix
